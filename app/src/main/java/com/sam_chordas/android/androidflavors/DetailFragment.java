@@ -17,8 +17,7 @@ import android.widget.TextView;
 import com.sam_chordas.android.androidflavors.data.FlavorsContract;
 
 
-
-public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     private Cursor mDetailCursor;
@@ -57,9 +56,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        mImageView = (ImageView) rootView.findViewById(R.id.flavor_icon);
-        mTextView = (TextView) rootView.findViewById(R.id.version_description);
-        mUriText = (TextView) rootView.findViewById(R.id.uri);
+        mImageView = rootView.findViewById(R.id.flavor_icon);
+        mTextView = rootView.findViewById(R.id.version_description);
+        mUriText = rootView.findViewById(R.id.uri);
         Bundle args = this.getArguments();
         getLoaderManager().initLoader(CURSOR_LOADER_ID, args, DetailFragment.this);
 
@@ -74,10 +73,10 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args){
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String selection = null;
-        String [] selectionArgs = null;
-        if (args != null){
+        String[] selectionArgs = null;
+        if (args != null) {
             selection = FlavorsContract.FlavorEntry._ID;
             selectionArgs = new String[]{String.valueOf(mPosition)};
         }
@@ -90,7 +89,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -108,7 +107,7 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
 
     // reset CursorAdapter on Loader Reset
     @Override
-    public void onLoaderReset(Loader<Cursor> loader){
+    public void onLoaderReset(Loader<Cursor> loader) {
         mDetailCursor = null;
     }
 

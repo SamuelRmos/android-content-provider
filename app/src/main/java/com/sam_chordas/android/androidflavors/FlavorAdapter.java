@@ -25,13 +25,13 @@ public class FlavorAdapter extends CursorAdapter {
         public final ImageView imageView;
         public final TextView textView;
 
-        public ViewHolder(View view){
+        public ViewHolder(View view) {
             imageView = (ImageView) view.findViewById(R.id.flavor_image);
             textView = (TextView) view.findViewById(R.id.flavor_text);
         }
     }
 
-    public FlavorAdapter(Context context, Cursor c, int flags, int loaderID){
+    public FlavorAdapter(Context context, Cursor c, int flags, int loaderID) {
         super(context, c, flags);
         Log.d(LOG_TAG, "FlavAdapter");
         mContext = context;
@@ -39,7 +39,7 @@ public class FlavorAdapter extends CursorAdapter {
     }
 
     @Override
-    public View newView(Context context, Cursor cursor, ViewGroup parent){
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
         int layoutId = R.layout.flavor_item;
 
         Log.d(LOG_TAG, "In new View");
@@ -52,8 +52,7 @@ public class FlavorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor){
-
+    public void bindView(View view, Context context, Cursor cursor) {
         ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         Log.d(LOG_TAG, "In bind View");
@@ -67,7 +66,6 @@ public class FlavorAdapter extends CursorAdapter {
         Log.i(LOG_TAG, "Image reference extracted: " + image);
 
         viewHolder.imageView.setImageResource(image);
-
     }
 
 }

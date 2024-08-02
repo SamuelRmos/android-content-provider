@@ -1,13 +1,29 @@
-apply plugin: 'com.android.application'
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdk 34
+    buildToolsVersion "34.0.0"
+
+    def javaVersion = JavaVersion.VERSION_1_8
+
+    tasks.withType(KotlinCompile).configureEach {
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
+
+        kotlinOptions {
+            jvmTarget = javaVersion.toString()
+        }
+    }
 
     defaultConfig {
         applicationId "com.sam_chordas.android.androidflavors"
-        minSdkVersion 10
-        targetSdkVersion 22
+        minSdkVersion 28
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
     }
@@ -17,11 +33,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    namespace "com.sam_chordas.android.androidflavors"
+    dependencies {
+        implementation fileTree(dir: 'libs', include: ['*.jar'])
+        implementation 'com.android.support:appcompat-v7:28.0.0'
+        implementation 'com.android.support:support-v4:28.0.0'
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.72"
+    }
 }
 
-dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.facebook.stetho:stetho:1.1.1'
-    compile 'com.android.support:support-v4:22.2.0'
-}

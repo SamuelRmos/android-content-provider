@@ -21,7 +21,7 @@ import com.sam_chordas.android.androidflavors.data.FlavorsContract;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>{
+public class MainActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
@@ -62,14 +62,14 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState){
+    public void onActivityCreated(Bundle savedInstanceState) {
         Cursor c =
-            getActivity().getContentResolver().query(FlavorsContract.FlavorEntry.CONTENT_URI,
-            new String[]{FlavorsContract.FlavorEntry._ID},
-                    null,
-                    null,
-                    null);
-        if (c.getCount() == 0){
+                getActivity().getContentResolver().query(FlavorsContract.FlavorEntry.CONTENT_URI,
+                        new String[]{FlavorsContract.FlavorEntry._ID},
+                        null,
+                        null,
+                        null);
+        if (c.getCount() == 0) {
             insertData();
         }
         // initialize loader
@@ -113,11 +113,11 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     // insert data into database
-    public void insertData(){
+    public void insertData() {
         ContentValues[] flavorValuesArr = new ContentValues[flavors.length];
         // Loop through static array of Flavors, add each to an instance of ContentValues
         // in the array of ContentValues
-        for(int i = 0; i < flavors.length; i++){
+        for (int i = 0; i < flavors.length; i++) {
             flavorValuesArr[i] = new ContentValues();
             flavorValuesArr[i].put(FlavorsContract.FlavorEntry.COLUMN_ICON, flavors[i].image);
             flavorValuesArr[i].put(FlavorsContract.FlavorEntry.COLUMN_VERSION_NAME,
@@ -134,7 +134,7 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     // Attach loader to our flavors database query
     // run when loader is initialized
     @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args){
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(getActivity(),
                 FlavorsContract.FlavorEntry.CONTENT_URI,
                 null,
@@ -144,22 +144,19 @@ public class MainActivityFragment extends Fragment implements LoaderManager.Load
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
 
     // Set the cursor in our CursorAdapter once the Cursor is loaded
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
         mFlavorAdapter.swapCursor(data);
-
-
     }
 
     // reset CursorAdapter on Loader Reset
     @Override
-    public void onLoaderReset(Loader<Cursor> loader){
+    public void onLoaderReset(Loader<Cursor> loader) {
         mFlavorAdapter.swapCursor(null);
     }
 }
